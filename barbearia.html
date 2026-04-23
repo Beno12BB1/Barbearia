@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blade & Co. — Barbearia Premium</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #0a0a0a; color: #f0f0f0; }
+
+    /* NAV */
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 48px; background: #111; border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; }
+    .logo { font-size: 22px; font-weight: 700; letter-spacing: 3px; color: #c9a84c; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 13px; color: #aaa; text-decoration: none; letter-spacing: 1px; transition: color 0.2s; }
+    .nav-links a:hover { color: #c9a84c; }
+    .nav-cta { background: #c9a84c; color: #0a0a0a; padding: 10px 24px; border-radius: 4px; font-size: 13px; font-weight: 700; text-decoration: none; letter-spacing: 1px; }
+
+    /* HERO */
+    .hero { padding: 100px 48px; background: linear-gradient(135deg, #111 60%, #1a1408 100%); text-align: center; }
+    .hero-badge { display: inline-block; background: #1e1800; color: #c9a84c; font-size: 12px; letter-spacing: 2px; padding: 8px 20px; border-radius: 20px; border: 1px solid #c9a84c55; margin-bottom: 24px; }
+    .hero h1 { font-size: 52px; font-weight: 700; line-height: 1.15; color: #f0f0f0; margin-bottom: 20px; }
+    .hero h1 span { color: #c9a84c; }
+    .hero p { font-size: 18px; color: #888; max-width: 500px; margin: 0 auto 36px; line-height: 1.7; }
+    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-gold { background: #c9a84c; color: #0a0a0a; border: none; padding: 16px 36px; font-size: 15px; font-weight: 700; letter-spacing: 1px; border-radius: 4px; cursor: pointer; text-decoration: none; }
+    .btn-outline { background: transparent; color: #c9a84c; border: 2px solid #c9a84c; padding: 14px 32px; font-size: 15px; font-weight: 600; letter-spacing: 1px; border-radius: 4px; cursor: pointer; text-decoration: none; }
+    .btn-gold:hover { background: #b8962f; }
+    .btn-outline:hover { background: #c9a84c11; }
+
+    /* STATS */
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); background: #111; border-top: 1px solid #222; border-bottom: 1px solid #222; }
+    .stat { padding: 36px; text-align: center; border-right: 1px solid #222; }
+    .stat:last-child { border-right: none; }
+    .stat-num { font-size: 36px; font-weight: 700; color: #c9a84c; }
+    .stat-label { font-size: 12px; color: #555; letter-spacing: 2px; margin-top: 6px; text-transform: uppercase; }
+
+    /* SECTIONS */
+    section { padding: 80px 48px; }
+    section:nth-child(even) { background: #0d0d0d; }
+    .section-tag { font-size: 11px; letter-spacing: 3px; color: #c9a84c; text-transform: uppercase; margin-bottom: 10px; }
+    .section-title { font-size: 32px; font-weight: 700; color: #f0f0f0; margin-bottom: 48px; }
+
+    /* SERVICES */
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .service-card { background: #141414; border: 1px solid #222; border-radius: 10px; padding: 32px; transition: border-color 0.2s; }
+    .service-card:hover { border-color: #c9a84c55; }
+    .service-icon { font-size: 32px; margin-bottom: 16px; }
+    .service-card h3 { font-size: 18px; font-weight: 600; color: #f0f0f0; margin-bottom: 10px; }
+    .service-card p { font-size: 14px; color: #666; line-height: 1.7; margin-bottom: 20px; }
+    .service-price { font-size: 24px; font-weight: 700; color: #c9a84c; }
+
+    /* TEAM */
+    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .team-card { background: #141414; border: 1px solid #222; border-radius: 10px; overflow: hidden; }
+    .team-avatar { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 64px; background: #1a1408; }
+    .team-info { padding: 20px; }
+    .team-info h3 { font-size: 17px; font-weight: 600; color: #f0f0f0; }
+    .team-info .role { font-size: 13px; color: #666; margin-top: 4px; }
+    .stars { color: #c9a84c; font-size: 13px; margin-top: 10px; }
+
+    /* TESTIMONIALS */
+    .test-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .tcard { background: #141414; border: 1px solid #222; border-radius: 10px; padding: 28px; }
+    .tcard p { font-size: 15px; color: #aaa; line-height: 1.8; font-style: italic; margin-bottom: 16px; }
+    .tauthor { font-size: 14px; color: #c9a84c; font-weight: 600; }
+    .trating { color: #c9a84c; font-size: 13px; margin-top: 6px; }
+
+    /* CTA */
+    .cta { background: #111; text-align: center; padding: 100px 48px; border-top: 1px solid #222; }
+    .cta h2 { font-size: 36px; font-weight: 700; color: #f0f0f0; margin-bottom: 14px; }
+    .cta p { color: #666; font-size: 16px; margin-bottom: 36px; }
+
+    /* FOOTER */
+    footer { padding: 28px 48px; background: #080808; border-top: 1px solid #1a1a1a; display: flex; justify-content: space-between; align-items: center; }
+    footer p { font-size: 13px; color: #444; }
+    .footer-logo { font-size: 16px; color: #c9a84c; letter-spacing: 3px; font-weight: 700; }
+    .footer-links { display: flex; gap: 24px; list-style: none; }
+    .footer-links a { font-size: 13px; color: #444; text-decoration: none; }
+    .footer-links a:hover { color: #c9a84c; }
+
+    /* DIVIDER */
+    .divider { height: 1px; background: #222; margin: 0 48px; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .hero { padding: 60px 24px; }
+      .hero h1 { font-size: 32px; }
+      .stats { grid-template-columns: 1fr; }
+      .stat { border-right: none; border-bottom: 1px solid #222; }
+      section { padding: 60px 24px; }
+      .services-grid, .team-grid, .test-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">BLADE & CO.</div>
+    <ul class="nav-links">
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#equipe">Equipe</a></li>
+      <li><a href="#depoimentos">Depoimentos</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <a href="https://wa.me/5500000000000" class="nav-cta">Agendar agora</a>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-badge">✦ DESDE 2015 &nbsp;·&nbsp; BARBEARIA PREMIUM ✦</div>
+    <h1>A arte do corte<br><span>perfeito</span> está aqui.</h1>
+    <p>Tradição, estilo e precisão em cada corte. Venha viver a experiência de uma barbearia de verdade.</p>
+    <div class="hero-btns">
+      <a href="https://wa.me/5500000000000" class="btn-gold">📱 Agendar pelo WhatsApp</a>
+      <a href="#servicos" class="btn-outline">Ver serviços</a>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-num">2.400+</div><div class="stat-label">Clientes atendidos</div></div>
+    <div class="stat"><div class="stat-num">9 anos</div><div class="stat-label">De experiência</div></div>
+    <div class="stat"><div class="stat-num">4.9 ★</div><div class="stat-label">Avaliação média</div></div>
+  </div>
+
+  <section id="servicos">
+    <div class="section-tag">Nossos serviços</div>
+    <div class="section-title">O melhor pra você</div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">✂️</div>
+        <h3>Corte clássico</h3>
+        <p>Corte tradicional com acabamento impecável na navalha. Feito sob medida pro seu estilo.</p>
+        <div class="service-price">R$ 45</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🪒</div>
+        <h3>Barba completa</h3>
+        <p>Modelagem, hidratação e acabamento com navalha quente. Barba dos sonhos garantida.</p>
+        <div class="service-price">R$ 35</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">👑</div>
+        <h3>Combo premium</h3>
+        <p>Corte + barba + sobrancelha + produto finalizador. A experiência completa em uma visita.</p>
+        <div class="service-price">R$ 70</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="equipe">
+    <div class="section-tag">Nossa equipe</div>
+    <div class="section-title">Barbeiros profissionais</div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">👨‍🦱</div>
+        <div class="team-info">
+          <h3>Rafael Costa</h3>
+          <div class="role">Especialista em degradê</div>
+          <div class="stars">★★★★★ &nbsp; 8 anos de experiência</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">👨‍🦳</div>
+        <div class="team-info">
+          <h3>Lucas Mendes</h3>
+          <div class="role">Mestre em barbas</div>
+          <div class="stars">★★★★★ &nbsp; 6 anos de experiência</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">👨</div>
+        <div class="team-info">
+          <h3>Diego Alves</h3>
+          <div class="role">Cortes modernos</div>
+          <div class="stars">★★★★★ &nbsp; 5 anos de experiência</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="depoimentos">
+    <div class="section-tag">Depoimentos</div>
+    <div class="section-title">O que os clientes dizem</div>
+    <div class="test-grid">
+      <div class="tcard">
+        <p>"Melhor barbearia da cidade. O Rafael entendeu exatamente o que eu queria, saí com o corte perfeito. Recomendo demais!"</p>
+        <div class="tauthor">— Marcos T.</div>
+        <div class="trating">★★★★★ &nbsp; Cliente há 3 anos</div>
+      </div>
+      <div class="tcard">
+        <p>"Ambiente incrível, atendimento top e qualidade impecável. Vale muito cada centavo. Não troco por nada!"</p>
+        <div class="tauthor">— Felipe S.</div>
+        <div class="trating">★★★★★ &nbsp; Cliente há 2 anos</div>
+      </div>
+      <div class="tcard">
+        <p>"Fui pela primeira vez indicado por um amigo e já virei cliente fiel. A barba ficou exatamente como eu queria!"</p>
+        <div class="tauthor">— André M.</div>
+        <div class="trating">★★★★★ &nbsp; Cliente há 1 ano</div>
+      </div>
+      <div class="tcard">
+        <p>"Atendimento pontual, ambiente limpo e profissionais muito qualificados. Melhor investimento da semana!"</p>
+        <div class="tauthor">— Carlos R.</div>
+        <div class="trating">★★★★★ &nbsp; Cliente há 6 meses</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta" id="contato">
+    <div class="section-tag" style="margin-bottom:16px;">Agende agora</div>
+    <h2>Pronto pro seu melhor corte?</h2>
+    <p>Atendemos de segunda a sábado, das 9h às 20h. Sem fila, sem espera.</p>
+    <a href="https://wa.me/5500000000000" class="btn-gold">📱 Chamar no WhatsApp</a>
+  </div>
+
+  <footer>
+    <p>© 2025 Blade & Co. Todos os direitos reservados.</p>
+    <ul class="footer-links">
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#equipe">Equipe</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <div class="footer-logo">BLADE & CO.</div>
+  </footer>
+
+</body>
+</html>
